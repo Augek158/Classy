@@ -1,0 +1,23 @@
+<html ng-app="classyApp">
+<head>
+	<title>Classy Issue =)</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src='bower_components/jquery/dist/jquery.min.js'></script>
+	<script src="bower_components/angular/angular.min.js"></script>
+	<script src='bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js'></script>
+	<script src="src/app.js"></script>
+
+</head>
+<body>
+	<div class="info">
+	</div>
+		<div ng-controller="ImageListCtrl">
+			<div class="image-list" infinite-scroll="scroll()">
+				<div class="image-container" ng-repeat="photo in photos">
+					<img ng-src="{{photo}}">
+				</div>
+			</div>
+			<div class="spinner"></div>
+		</div>
+</body>
+</html>
