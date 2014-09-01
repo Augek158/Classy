@@ -1,22 +1,25 @@
+(function () {
 "use strict";
-(function (){
 
-	function ImageListCtrl($scope, $http) {
-		var lock = false,
+	function ImageListCtrl ($http) {
+		var vm = this,
+			lock = false,
 		    offset = 0;
 		   			
-		   	$scope.photos = [];
+		   	vm.photos = [];
 
-	   		$scope.scroll = function() {
+		   	// Handle scrolling
+	   		vm.scroll = function () {
 	   			var height = document.querySelector('.image-list').offsetHeight,
 	   				scrollPos = documentScrollTop();
 
 	   			if(((height - scrollPos) < 2000) &! lock){
-	   				addMoreItems();
+	   				vm.addMoreItems();
 	   			}
 	   		};
 
-	   		function addMoreItems() {
+	   		// Fetch items from Tumblr
+	   		vm.addMoreItems = function () {
 	   			lock = true;
 	   			angular.element('.spinner').show();
 
@@ -31,20 +34,30 @@
 		   		offset += 20;
 	   		};
 
-	   		function getPhotoUrls(result) {
+	   		// Take user to original post
+	   		vm.goToPost = function (index) {
+				window.location.href = vm.photos[index].postUrl;
+			}
+
+	   		// Retrieve photo urls
+	   		function getPhotoUrls (result) {
 				for (var index in result.posts){
-					var photo = result.posts[index].photos[0].original_size;
-			 		$scope.photos.push(photo.url);
+					var post = result.posts[index];
+					var photo = { 
+						"imgUrl" : post.photos[0].original_size.url,
+						"postUrl" : post.post_url
+					};
+
+			 		vm.photos.push(photo);
 				}
 			};
 
-			function documentScrollTop() {
+			// Scroll helper
+			function documentScrollTop () {
 			     return (document.documentElement.scrollTop + document.body.scrollTop
 			     == document.documentElement.scrollTop) ?
 			     document.documentElement.scrollTop : document.body.scrollTop;
 			}; 
-
-	   		addMoreItems();
 	};
 
 	angular.module('classyApp', ['infinite-scroll'])

@@ -21,6 +21,7 @@
 .image-container {
 	overflow: hidden;
 	margin-bottom: 5px;
+	cursor: pointer;
 }
 
 .image-container img {
