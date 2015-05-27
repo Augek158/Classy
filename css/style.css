@@ -19,8 +19,9 @@
 }
 
 .image-container {
+	max-width: 640px;
 	overflow: hidden;
-	margin-bottom: 5px;
+	margin: 0px auto;
 	cursor: pointer;
 }
 
