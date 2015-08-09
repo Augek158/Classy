@@ -19,11 +19,33 @@
 }
 
 .image-container {
-	max-width: 640px;
 	overflow: hidden;
 	margin: 0px auto;
 	cursor: pointer;
 }
+
+/* ----------- Non-Retina Screens ----------- */
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) { 
+
+	.image-container {
+		max-width: 900px;
+	}
+}
+
+/* ----------- Retina Screens ----------- */
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (min-resolution: 192dpi) { 
+
+	.image-container {
+		max-width: 900px;
+	}
+}
+
 
 .image-container img {
 	width: 100%;
